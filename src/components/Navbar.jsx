@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/images/logo.png';
+import logo from '../assets/images/logo.png';
 
 
 const Navbar = () => {
@@ -51,7 +51,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className='bg-white p-4 w-full flex justify-around'>
+      <div className='bg-black p-4 w-full flex justify-around'>
           <div className='text-black font-inter text-base font-medium tracking-normal leading-none text-center'>
               50% OFF
           </div>
