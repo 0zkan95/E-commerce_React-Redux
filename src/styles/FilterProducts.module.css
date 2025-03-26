@@ -41,15 +41,33 @@
 }
 
 .cards-footer {
+    border-top: 1px solid black;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding-top: 0.75rem;
+}
+
+.cards-footer h6 {
+    width: 30%;
+    margin-left: 1px;
+    
 }
 
 .colors {
     display: flex;
-    gap: 0.25rem;
+    gap: 0.1rem;
+    width: 70%;
+    justify-content: end;
+}
+
+.colors i {
+    margin-left: 1rem;
+    margin-top: 3px;
+    border-radius: 100%;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    gap: 0.15rem;
 }
 

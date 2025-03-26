@@ -36,10 +36,10 @@ const FilterProducts = () => {
                                     <h6>$ {product.price}</h6>
                                     <p className={styles.colors}>
                                         {product.color?.map((color, index) => {
-                                            console.log("colors: ", color)
+                                            
                                             return (
                                                 
-                                                <i className='fas fa-map-marker-alt fa-sm mt-[3px] rounded-full p-2 mr-4 gap-1'
+                                                <i 
                                                     key={index}
                                                     style={{ backgroundColor: color }}
                                                 >
