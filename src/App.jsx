@@ -3,7 +3,7 @@ import "./App.css";
 import FilterProducts from "./components/FilterProducts";
 import Main from './components/Main';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import '@fortawesome/fontawesome-free/css/all.css';
+import SingleProduct from "./components/SingleProduct";
 
 
 
@@ -17,6 +17,9 @@ const App = () => {
           <Route 
             path={"/filteredProducts/:type"} 
             element={<FilterProducts />} /> 
+          <Route 
+            path={"/filteredProducts/:type/:id"} 
+            element={<SingleProduct />} />
         </Routes>
       </BrowserRouter>
 
