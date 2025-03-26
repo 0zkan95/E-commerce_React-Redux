@@ -1,4 +1,4 @@
-#sales{
+#sales {
     padding: 0.5rem;
     width: 50%;
     font-size: large;
@@ -17,4 +17,21 @@
 
 .clothes img {
     margin: auto;
+}
+
+.filterBtn {
+    background-color: transparent;
+    border: 1px solid #7bf1a8;
+    border-radius: 10px;
+    padding: 2px 20px;
+    margin: 15px 20px;
+    font-size: 1.2rem;
+    
+}
+
+.filterBtn:hover {
+    background-color: #7bf1a8;
+    transition-duration: 300ms;
+    transition: ease-in-out;
+    cursor: pointer;
 }
