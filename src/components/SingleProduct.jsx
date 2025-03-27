@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import style from '../styles/SingleProduct.module.css';
+import { addToCart } from '../features/cartSlice';
+
 
 
 const SingleProduct = () => {
@@ -12,7 +14,8 @@ const SingleProduct = () => {
 
     const productColor = product[0].color[0];
     const [color, setColor] = useState(productColor);
-    console.log(color);
+
+    const dispatch = useDispatch();
 
 
     return (
@@ -42,7 +45,8 @@ const SingleProduct = () => {
                                             <div>
                                                 <label
                                                     htmlFor="size"
-                                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                                >
                                                     Sizes
                                                 </label>
                                                 <select
@@ -109,7 +113,19 @@ const SingleProduct = () => {
                                         </select>
                                     </div>
                                     <div>
-                                        <button className={style["add-btn"]}>
+                                        <button
+                                            onClick={() => dispatch(addToCart({
+                                                id: item.id,
+                                                name: item.name,
+                                                size: size,
+                                                color: color,
+                                                price: item.price,
+                                                amount: 1,
+                                                totalPrice: item.price,
+                                            })
+                                            )
+                                            }
+                                            className={style["add-btn"]}>
                                             Add to Cart
                                         </button>
                                     </div>

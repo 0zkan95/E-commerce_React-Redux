@@ -20,6 +20,8 @@
 
 .info-con {
     flex-grow: 3;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 #item-name {
