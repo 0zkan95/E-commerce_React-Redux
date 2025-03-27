@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import style from '../styles/SingleProduct.module.css';
 
 
 const SingleProduct = () => {
@@ -19,31 +20,30 @@ const SingleProduct = () => {
             {product.filter((product) => product.id === id)
                 .map((item, index) => {
                     return (
-                        <div key={index} className='flex justify-center items-center py-10'>
-                            <div className='pl-44 grow-[2]'>
+                        <div key={index} className={style.container}>
+                            <div className={style["img-div"]}>
                                 <img
-                                    className='h-[850px] rounded-lg'
                                     src={item.img}
                                     alt={item.name} />
                             </div>
-                            <div className='grow-[3]'>
+                            <div className={style["info-con"]}>
                                 <div className='max-w-lg'>
-                                    <h5 className='text-2xl font-inter font-bold tracking-normal leading-none pb-4'>
+                                    <h5 id={style['item-name']} >
                                         {item.name}
                                     </h5>
-                                    <p className='text-green-600 text-xl font-inter font-bold tracking-normal leading-none pb-4'>
+                                    <p className={style.discount}>
                                         15% OFF
                                     </p>
-                                    <p className='text-gray-600 text-xl font-inter font-bold tracking-normal leading-none pb-4'>
+                                    <p className={style['item-text']}>
                                         {item.text}
                                     </p>
-                                    <div className='pb-4'>
+                                    <div className={style['choice-div']}>
                                         {item.size ? (
                                             <div>
                                                 <label
                                                     htmlFor="size"
                                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Pick a size
+                                                    Sizes
                                                 </label>
                                                 <select
                                                     id='size'
@@ -66,7 +66,7 @@ const SingleProduct = () => {
                                                 <label
                                                     htmlFor="size"
                                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Pick a size
+                                                    Sizes
                                                 </label>
                                                 <select
                                                     id='size'
@@ -91,7 +91,7 @@ const SingleProduct = () => {
                                         <label
                                             htmlFor="color"
                                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Pick a color
+                                            Colors
                                         </label>
                                         <select
                                             id='color'
@@ -109,7 +109,7 @@ const SingleProduct = () => {
                                         </select>
                                     </div>
                                     <div>
-                                        <button>
+                                        <button className={style["add-btn"]}>
                                             Add to Cart
                                         </button>
                                     </div>
