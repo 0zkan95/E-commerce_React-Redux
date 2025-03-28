@@ -118,6 +118,8 @@ const SingleProduct = () => {
                                                 id: item.id,
                                                 name: item.name,
                                                 size: size,
+                                                img: item.img,
+                                                text: item.text,
                                                 color: color,
                                                 price: item.price,
                                                 amount: 1,
