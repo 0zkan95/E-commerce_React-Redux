@@ -20,7 +20,6 @@ export const sliderSlice = createSlice({
         dotSlide(state, action) {
             const slide = action.payload;
             state.value = slide;
-            console.log("dot", slide);
             
         },
     },

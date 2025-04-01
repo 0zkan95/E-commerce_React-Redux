@@ -7,7 +7,6 @@ import { sliderData } from '../assets/data/data';
 
 function Slider() {
     const sliderIndex = useSelector((state) => state.slider.value);
-    console.log("slideIndex", sliderIndex);
     const dispatch = useDispatch();
 
 

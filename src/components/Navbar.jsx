@@ -2,16 +2,20 @@ import React from 'react';
 import logo from '../assets/images/logo.png';
 import Cart from './Cart';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../features/AuthSlice';
 
 
 const Navbar = () => {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
-    setOpen(!open);
+    setOpen(true);
   }
 
+  const user = useSelector((state) => state.user.user);
+  const { name } = user;
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -65,9 +69,14 @@ const Navbar = () => {
             <p className='text-white font-inter text-base font-medium tracking-normal leading-none text-center mr-4'>Shopping Bag</p>
 
             <div>
-
               {open && <Cart openModal={open} setOpen={setOpen} />}
-
+            </div>
+          </div>
+          <div>
+            <div onClick={() => dispatch(logout())}>
+              <p className='font-inter text-sm font-medium tracking-normal leading-none cursor-pointer'>
+                Hi {name.charAt(0).toUpperCase() + name.slice(1)}
+              </p>
             </div>
           </div>
 

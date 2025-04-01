@@ -2,13 +2,14 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../styles/Cart.module.css';
 import { CiSquareRemove } from "react-icons/ci";
-
+//import { removeFromCart } from '../features/cartSlice';
 
 
 
 const Cart = ({openModal, setOpen }) => {
     const cart = useSelector((state) => state.cart.cart);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
+   // const dispatch = useDispatch();
 
     const handleOpen = () => {
         setOpen(!true)
@@ -69,7 +70,7 @@ const Cart = ({openModal, setOpen }) => {
                                             Price: {" "}
                                             <span className='ml-2'>$ {item.price}</span>
                                         </p>
-                                        <button>< CiSquareRemove  color="red" size={30} /></button>
+                                        <button >< CiSquareRemove  color="red" size={30} /></button>
                                     </div>
                                 </div>
                             </div>

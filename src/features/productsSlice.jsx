@@ -17,7 +17,6 @@ export const productSlice = createSlice({
                     (product) => product.type === action.payload
             );
             state.filteredProducts = filter;
-            console.log("filter", filter);
             const savedState = JSON.stringify(filter);
             sessionStorage.setItem("filteredData", savedState);
             } catch (err) {
