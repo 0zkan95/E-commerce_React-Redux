@@ -23,23 +23,22 @@ const NavigateButtons = () => {
   return (
     <div>
       <div className='flex items-center justify-center py-8'>
-        {buttons.map((button, index) => {
+        {buttons.map((button) => { // No need for index if button name is unique key
           return (
-            <div className='m-4' key={index}>
-              <Link to={"/filteredProducts/" + button}>
+            // Removed outer div, apply margin directly to Link/Button if needed
+            <Link to={"/filteredProducts/" + button} key={button} className="m-2"> 
                 <button
-                  className={styles.filterBtn}
+                  className="bg-[#d1ded4] border-2 border-white rounded-lg px-5 py-1 text-xl opacity-80 font-medium text-black cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300 ease-in-out" 
                   onClick={() => dispatch(filterProducts(button))}
                 >
                   {button}
                 </button>
               </Link>
-            </div>
           )
         })}
       </div>
-      <div id={styles.sales} className='bg-green-300 mx-auto rounded-md'>
-        <h3 className='text-center text-white text-lg font-inter font-bold tracking-normal leading-none'>
+      <div id={styles.sales} className='bg-[#d1ded4] w-full mx-auto '>
+        <h3 className='text-center text-white text-2xl font-inter font-bold tracking-normal leading-none'>
           SALES UP TO 50%
         </h3>
       </div>

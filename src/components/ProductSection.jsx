@@ -6,17 +6,18 @@ import ProductSectionItem from './ProductSectionItem'
 
 const ProductSection = () => {
   return (
-    <div>
-      <div className='bg-black p-2 w[50%] mx-auto rounded-md'>
-            <h2 className='text-red-600 text-center text-lg font-inter font-bold leading-none'>
+    <div className="my-8"> {/* Add some margin to the section */}
+      {/* Updated banner styling */}
+      <div className='bg-[#d1ded4] py-4 px-2 w-full mx-auto mb-8'> {/* Changed bg, padding, width, added bottom margin */}
+            <h2 className='text-black text-center text-2xl font-inter font-bold leading-relaxed'> {/* Changed text color, size, leading */}
                 SUMMER T-SHIRT SALE 30%
             </h2>
       </div>
       <div className='grid grid-cols-3 justify-items-center py-8 gap-4 mx-auto max-w-7xl'>
         {storeData.slice(0,6).map((product, index) => {
             return (
-            <div className='' key={index}>
                 <ProductSectionItem
+                    key={index} // Move key to the actual item being mapped
                     id={product.id} 
                     name={product.name} 
                     img={product.img} 
@@ -24,10 +25,8 @@ const ProductSection = () => {
                     price={product.price} 
                     totalPrice={product.totalPrice} 
                     color={product.color} 
-                    size={product.size} 
-                
+                    size={product.size}
                 />
-            </div>
         )
         })}
       </div>

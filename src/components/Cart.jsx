@@ -1,112 +1,133 @@
-import React from 'react'
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styles from '../styles/Cart.module.css';
 import { CiSquareRemove } from "react-icons/ci";
-//import { removeFromCart } from '../features/cartSlice';
+import { IoClose } from "react-icons/io5"; // Import close icon
+import { removeFromCart } from '../features/cartSlice'; // Import removeFromCart action
 
-
-
-const Cart = ({openModal, setOpen }) => {
+const Cart = ({ openModal, setOpen }) => {
     const cart = useSelector((state) => state.cart.cart);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
-   // const dispatch = useDispatch();
+    const dispatch = useDispatch(); // Keep dispatch if needed for remove action
 
-    const handleOpen = () => {
-        setOpen(!true)
-    }
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    // Updated handler for removing item
+    const handleRemoveItem = (itemToRemove) => {
+        dispatch(removeFromCart(itemToRemove));
+    };
+
+    if (!openModal) return null;
 
     return (
-        <div className='bg-gray-300 rounded-2xl border-white-700 border-3 w-[600px] h-[500px] absolute left-[25%] top-[25%] z-10'>
-            {cart.length > 0 ? 
-           ( <dialog
-                open={openModal}
-                onChange={() => handleOpen(false)}  
-                className={styles.dialog}
+        // Full screen overlay for centering and backdrop
+        // Added onClick={handleClose} to close when clicking the overlay
+        <div
+            className='fixed inset-0 z-50 flex items-center justify-center' // Removed Tailwind bg classes
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }} // Added inline style for background
+            onClick={handleClose}
+        >
+            {/* Modal Container - Stop propagation to prevent closing when clicking inside */}
+            <div
+                className='bg-white rounded-lg shadow-xl w-full max-w-xl max-h-[80vh] flex flex-col'
+                onClick={(e) => e.stopPropagation()} // Prevents overlay click when clicking inside modal
             >
-                <h3 className='text-center border-b-2'>
-                    Shopping Bag
-                </h3>
-                <section className={styles["card-list"]}>
-                    
-                    {cart.map((item, index) => {
-                        return (
-                            <div key={index}>
-                                <div className='grid grid-cols-2 py-4'>
-                                    <div>
-                                        <img 
-                                            src={item.img} 
-                                            alt={item.name} 
-                                            className='h-[75px]'    
-                                        />
-                                        <div className='flex flex-col items-start'>
-                                            <h4 className='text-black text-base font-bold tracking-normal leading-none pt-2'>
-                                                {item.name}
-                                            </h4>
-                                         </div>
-                                        <div className='max-w-xs'>
-                                            <p className='text-black text-xs tracking-normal leading-none'>
-                                                {item.text}
-                                            </p>
-                                            
+                {/* Modal Header */}
+                <div className="flex justify-between items-center p-4 border-b border-gray-200">
+                    <h3 className='text-xl font-semibold text-gray-800'>Shopping Bag</h3>
+                    <button 
+                        onClick={handleClose} 
+                        className="text-gray-400 hover:text-gray-600 transition-colors hover:cursor-pointer"
+                    >
+                        <IoClose size={24} /> {/* Close Button */}
+                    </button>
+                </div>
+
+                {/* Modal Body */}
+                <div className="p-4 overflow-y-auto flex-grow"> {/* Added flex-grow */}
+                    {cart.length > 0 ? (
+                        <>
+                            {/* Cart Items */}
+                            <section className="space-y-4"> {/* Use space-y for spacing */}
+                                {cart.map((item) => ( // Removed index as key if item.id is unique
+                                    <div key={item.id} className="border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
+                                        <div className='grid grid-cols-4 gap-4 items-center'> {/* Changed to 4 cols */}
+                                            {/* Image Column */}
+                                            <div className="col-span-1">
+                                                <img
+                                                    src={item.img}
+                                                    alt={item.name}
+                                                    className='h-20 w-20 object-cover rounded'
+                                                />
+                                            </div>
+                                            {/* Info Column */}
+                                            <div className="col-span-2 flex flex-col items-start">
+                                                <h4 className='text-gray-800 text-base font-semibold tracking-normal leading-tight mb-1 line-clamp-1'>
+                                                    {item.name}
+                                                </h4>
+                                                {/* <p className='text-gray-500 text-xs tracking-normal leading-tight mb-2 line-clamp-2'>
+                                                    {item.text} // Optional: Add text back if needed
+                                                </p> */}
+                                                <p className='text-gray-600 text-sm font-inter tracking-normal leading-tight'>
+                                                    Size: <span className='ml-1 font-medium'>{item.size}</span>
+                                                </p>
+                                                <p className='text-gray-600 flex items-center text-sm font-inter tracking-normal leading-tight'>
+                                                    Color:
+                                                    <span
+                                                        className="rounded-full w-4 h-4 inline-block ml-1 border border-gray-300"
+                                                        style={{ backgroundColor: item.color }}
+                                                    ></span>
+                                                </p>
+                                            </div>
+                                            {/* Price/Amount/Remove Column */}
+                                            <div className="col-span-1 flex flex-col items-end justify-between h-full">
+                                                <p className='text-gray-800 text-sm font-semibold tracking-normal leading-none'>
+                                                    ${(item.price * item.amount).toFixed(2)} {/* Display total price for item */}
+                                                </p>
+                                                <p className='text-gray-600 text-xs font-inter tracking-normal leading-none mt-1'>
+                                                    Qty: {item.amount}
+                                                </p>
+                                                <button
+                                                    onClick={() => handleRemoveItem(item)} // Pass the whole item object
+                                                    title="Remove item"
+                                                    className="text-red-500 hover:text-red-700 mt-2"
+                                                >
+                                                    <CiSquareRemove size={20} />
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div >
-                                        <p className='text-black text-sm font-inter tracking-normal leading-none pt-2'>
-                                            Selected size: {" "}
-                                            <span className='ml-2'>{item.size}</span>
-                                        </p>
-                                        <p className='text-black flex items-center justify-start text-sm font-inter tracking-normal leading-none pt-2'>
-                                            Selected color: {"  "} 
-                                            <span  
-                                                className="rounded-full w-4 h-4 inline-block" 
-                                                style={{backgroundColor: item.color}}
-                                            ></span>
-                                        </p>
-                                        <p className='text-black text-sm font-inter tracking-normal leading-none pt-2'>
-                                            Amount: {" "}
-                                            <span className='ml-2'>{item.amount}</span>
-                                        </p>
-                                        <p className='text-black text-sm font-inter tracking-normal leading-none pt-2'>
-                                            Price: {" "}
-                                            <span className='ml-2'>$ {item.price}</span>
-                                        </p>
-                                        <button >< CiSquareRemove  color="red" size={30} /></button>
-                                    </div>
-                                </div>
-                            </div>
-                            )
-                    })}
-                </section>
-                <footer className={styles.footer}>
-                    <p>Total Price: $ {totalPrice} </p>
-                    <button className={styles["order-btn"]}>Order</button>
-                </footer>
-            </dialog>)
-            :
-            ( <dialog
-                open={openModal}
-                onChange={() => handleOpen()}  
-                className={styles.dialog}
-            >
-                <h3 className='text-center border-b-2'>Shopping Bag</h3>
-                <section className={styles["sec-con"]}>
-                    <div>
-                        <h1 className={styles['bag-header']}>
-                            Your bag is empty
-                        </h1>
-                        <p className='text-black text-base font-inter font-bold tracking-normal leading-none'>
-                            Add some products
+                                ))}
+                            </section>
+                        </>
+                    ) : (
+                        // Empty Cart Message
+                        <section className="text-center py-10 flex flex-col items-center justify-center h-full">
+                            <h1 className='text-xl font-semibold text-gray-700 mb-2'>
+                                Your bag is empty
+                            </h1>
+                            <p className='text-gray-500'>
+                                Add some products to get started!
+                            </p>
+                        </section>
+                    )}
+                </div>
+
+                {/* Modal Footer */}
+                {cart.length > 0 && (
+                    <footer className="p-4 border-t border-gray-200 flex justify-between items-center bg-gray-50 rounded-b-lg">
+                        <p className="text-lg font-semibold text-gray-800">
+                            Total: ${totalPrice.toFixed(2)}
                         </p>
-                    </div>
-                </section>
-                <footer>
-
-                </footer>
-            </dialog> )
-
-        }
+                        <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium">
+                            Proceed to Checkout
+                        </button>
+                    </footer>
+                )}
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export default Cart
+export default Cart;

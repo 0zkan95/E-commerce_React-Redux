@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { nextSlide, prevSlide, dotSlide } from '../features/sliderSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { sliderData } from '../assets/data/data';
-
-
 
 function Slider() {
     const sliderIndex = useSelector((state) => state.slider.value);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (sliderIndex === sliderData.length - 1) {
+                dispatch(dotSlide(0));
+            } else {
+                dispatch(nextSlide(sliderIndex + 1));
+            }
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [sliderIndex, dispatch]);
 
     return (
         <div className='relative pb-4'>
@@ -44,7 +53,6 @@ function Slider() {
                             }
                                 onClick={() => dispatch(dotSlide(index))}
                             >
-
                             </div>
                         </div>
                     )
@@ -67,7 +75,6 @@ function Slider() {
                             d="M15.75 19.5 8.25 12l7.5-7.5" 
                         />
                     </svg>
-
                 </button>
                 <button
                     className='cursor-pointer absolute top-[50%] right-5 bg-white rounded-full hover:bg-green-300'
@@ -85,7 +92,6 @@ function Slider() {
                             d="m8.25 4.5 7.5 7.5-7.5 7.5"
                         />
                     </svg>
-
                 </button>
             </div>
         </div>

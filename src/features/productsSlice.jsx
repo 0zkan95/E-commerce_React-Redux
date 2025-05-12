@@ -15,13 +15,12 @@ export const productSlice = createSlice({
             try{
                 const filter = storeData.filter(
                     (product) => product.type === action.payload
-            );
-            state.filteredProducts = filter;
-            const savedState = JSON.stringify(filter);
-            sessionStorage.setItem("filteredData", savedState);
+                );
+                state.filteredProducts = filter;
+                const savedState = JSON.stringify(filter);
+                sessionStorage.setItem("filteredData", savedState);
             } catch (err) {
                 return err;
-                ;
             }
         },
 
@@ -30,6 +29,7 @@ export const productSlice = createSlice({
                 const oneProduct = storeData.filter(
                     (product) => product.id === action.payload
                 );
+                state.singleProduct = oneProduct;
                 const saveState = JSON.stringify(oneProduct);
                 sessionStorage.setItem("oneProduct", saveState);
             } catch(err) {

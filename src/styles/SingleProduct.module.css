@@ -9,63 +9,12 @@
 }
 
 .img-div {
-    padding-left: 11rem;
+    /* Consider adjusting padding/flex if needed after Card integration */
+    padding-left: 11rem; 
     flex-grow: 2;
 }
 
 .img-div img {
     height: 850px;
     border-radius: 8px;
-}
-
-.info-con {
-    flex-grow: 3;
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-#item-name {
-    font-size: 1.5rem;
-    line-height: 1.33;
-    font-weight: bold;
-    letter-spacing: normal;
-    padding-bottom: 1rem;
-}
-
-.discount {
-    color: #008D27;
-    font-size: 1.25rem;
-    font-weight: bold;
-    letter-spacing: normal;
-    line-height: 1;
-    padding-bottom: 1rem;
-}
-
-.item-text {
-    color: #4a5565;
-    font-size: 1.25rem;
-    font-weight: bold;
-    letter-spacing: normal;
-    line-height: 1;
-    padding-bottom: 1rem;
-}
-
-.choice-div {
-    padding-bottom: 1rem;
-}
-
-.add-btn {
-    margin-top: 1rem;
-    padding: .5rem 1rem;
-    border: 1px solid #008D27;
-    background-color: transparent;
-    border-radius: 8px;
-}
-
-.add-btn:hover {
-    background-color: #008D27;
-    transition: background-color 0.3s ease-in-out;
-    animation-duration: 3s;
-    transform: scale(1.05);
-    cursor: pointer;
 }

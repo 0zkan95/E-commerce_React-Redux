@@ -7,7 +7,7 @@ export const AuthSlice = createSlice({
         user: JSON.parse(sessionStorage.getItem("authUser")) || {
             name: "",
             password: "",
-            authUser: false,
+            authUser: true,
         },
     },
     reducers: {

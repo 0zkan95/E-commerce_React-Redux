@@ -1,6 +1,6 @@
 #sales {
-    padding: 0.5rem;
-    width: 50%;
+    padding-block: 2rem;
+    width: 100%;
     font-size: large;
     margin: auto;
     margin-top: 1rem;
@@ -19,6 +19,8 @@
     margin: auto;
 }
 
+/* .filterBtn styles removed/commented out as Tailwind is used now */
+/*
 .filterBtn {
     background-color: transparent;
     border: 1px solid #7bf1a8;
@@ -28,10 +30,12 @@
     font-size: 1.2rem;
     
 }
-
+*/
+/*
 .filterBtn:hover {
     background-color: #7bf1a8;
     transition-duration: 300ms;
     transition: ease-in-out;
     cursor: pointer;
 }
+*/

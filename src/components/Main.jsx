@@ -8,13 +8,13 @@ import Footer from './Footer';
 
 const Main = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <Slider />
       <NavigateButtons />
       <ProductSection />
       <Footer />
-    </div>
+    </>
   )
 }
 
